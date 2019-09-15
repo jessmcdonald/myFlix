@@ -25,3 +25,5 @@ http.createServer((request, response) => {
   response.writeHead(200, {'Content-Type': 'text/html'});
   response.end()
 }).listen(8080)
+
+console.log('Welcome to myFlix API');
