@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/styles.css">
   <title>Documentation for myFlix API</title>
 </head>
 
@@ -18,4 +18,139 @@
       Users will be able to sign up, update their personal information, and create a list of their favorite movies.
     </p>
   </div>
+  <div>
+    <h3>Endpoints and how to access</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Request</th>
+            <th>URL</th>
+            <th>HTTP Method</th>
+            <th>Request body data format</th>
+            <th>Response body data format</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>Get a list of all movies.</td>
+            <td>/movies</td>
+            <td style="background-color: #ddfada">GET</td>
+            <td>N/A</td>
+            <td>JSON object holding data about all movies.
+              <p>[ {
+                <br>
+                <br>id: '4',
+                <br>title: 'Lady Bird',
+                <br>description: 'In 2002, an artistically inclined seventeen-year-old girl comes of age in Sacramento, California.',
+                <br>genres: ['Comedy', 'Drama'],
+                <br>director: 'Greta Gerwig',
+                <br>imgURL: '/img.jpg',
+                <br>featured: false
+                <br>
+              <br>} ]</td>
+            </tr>
+
+            <tr>
+              <td>Get data about specific movie by title.</td>
+              <td>/movies/[movie title]</td>
+              <td style="background-color: #ddfada">GET</td>
+              <td>N/A</td>
+              <td>JSON object holding data about specific movie.
+                <p>{
+                  <br>
+                  <br>id: '4',
+                  <br>title: 'Lady Bird',
+                  <br>description: 'In 2002, an artistically inclined seventeen-year-old girl comes of age in Sacramento, California.',
+                  <br>genres: ['Comedy', 'Drama'],
+                  <br>director: 'Greta Gerwig',
+                  <br>imgURL: '/img.jpg',
+                  <br>featured: false
+                  <br>
+                <br>}</td>
+              </tr>
+
+              <tr>
+                  <td>Get description of genre by genre name.</td>
+                  <td>/genres/[genre name]</td>
+                  <td style="background-color: #ddfada">GET</td>
+                  <td>N/A</td>
+                  <td>JSON object holding name and description of specific genre.
+                    <p>{
+                      <br>name: 'Drama',
+                      <br>description: 'Drama film is a genre that relies on the emotional and relational development of realistic characters. While Drama film relies heavily on this kind of development, dramatic themes play a large role in the plot as well. Often, these dramatic themes are taken from intense, real life issues.'
+                    <br>}</td>
+              </tr>
+
+              <tr>
+                <td>Get data about specific director by director name.</td>
+                <td>/directors/[director name]</td>
+                <td style="background-color: #ddfada">GET</td>
+                <td>N/A</td>
+                <td>JSON object holding name, bio, DOB and DOD of specific diretor.
+                  <p>{
+                    <br>name: 'Spike Jonze',
+                    <br>bio:'Spike Jonze made up one-third (along with Andy Jenkins and Mark Lewman) of the triumvirate of genius minds behind Dirt Magazine, the brother publication of the much lamented ground-breaking Sassy Magazine. These three uncommon characters were all editors for Grand Royal Magazine as well, under the direction of Mike D and Adam Horovitz and Adam Yauch before the sad demise of Grand Royal Records. Jonze was also responsible for directing the famous Beastie Boys: Sabotage (1994) short film as well as numerous other music videos for various artists.',
+                    <br>born: '1969',
+                    <br>died: '-'
+                  <br>}</td>
+                </tr>
+
+                <tr>
+                  <td>Allow new users to register.</td>
+                  <td>/users</td>
+                  <td style="background-color: #f7dafa">POST</td>
+                  <td>JSON object containing new user data.
+                    <p>{
+                      <br>name: 'Jeff magnum',
+                      <br>email: 'jeffmagnum@neutralmilkmal.com',
+                      <br>password: '123456',
+                      <br>dob: '24.10.1970',
+                      <br>favourites: []
+                      <br>} </td>
+                  <td>JSON object containing new user data that was added plus a generated unique ID.
+                    <p>{
+                      <br>name: 'Jeff magnum',
+                      <br>email: 'jeffmagnum@neutralmilkmail.com',
+                      <br>password: '123456',
+                      <br>dob: '24.10.1970',
+                      <br>favourites: []
+                      <br>id: "3cbc4a12-b728-4f98-aee4-458134a9a009"
+                      <br>} </td>
+                </tr>
+
+                <tr>
+                  <td>Allow users to update own user information, e.g. password.</td>
+                  <td>/users/[user ID]/[new password]</td>
+                  <td style="background-color: #dafaf7">PUT</td>
+                  <td>N/A</td>
+                  <td>Text message indicating if information was successfully updated.  </td>
+                </tr>
+
+                <tr>
+                  <td>Allow users to add movies to own favourites lists.</td>
+                  <td>/users/[user ID]/favourites/[movie title]</td>
+                  <td style="background-color: #f7dafa">POST</td>
+                  <td>N/A</td>
+                  <td>Text message indicating if movie was successfully added to favourites list.  </td>
+                </tr>
+
+                <tr>
+                  <td>Allow users to delete movies from own favourites lists.</td>
+                  <td>/users/[user ID]/favourites/[movie title]</td>
+                  <td style="background-color: #fadadd">DELETE</td>
+                  <td>N/A</td>
+                  <td>Text message indicating if movie was successfully deleted from favourites list.  </td>
+                </tr>
+
+                <tr>
+                  <td>Allow users to deregister & delete own data from database.</td>
+                  <td>/users/[user ID]</td>
+                  <td style="background-color: #fadadd">DELETE</td>
+                  <td>N/A</td>
+                  <td>Text message indicating if user was successfully deregistered & deleted from database.  </td>
+                </tr>
+
+
+
 </body>
