@@ -23,11 +23,11 @@
       <table>
         <thead>
           <tr>
-            <th>Request</th>
-            <th>URL</th>
-            <th>HTTP Method</th>
-            <th>Request body data format</th>
-            <th>Response body data format</th>
+            <th class="col-req">Request</th>
+            <th class="col-url">URL</th>
+            <th class="col-http">HTTP Method</th>
+            <th class="col-reqbody">Request body data format</th>
+            <th class="col-resbody">Response body data format</th>
           </tr>
         </thead>
 
@@ -37,16 +37,24 @@
             <td>/movies</td>
             <td style="background-color: #ddfada">GET</td>
             <td>N/A</td>
-            <td>JSON object holding data about all movies.
+            <td>JSON object holding data about all movies:
               <p>[ {
                 <br>
-                <br>id: '4',
-                <br>title: 'Lady Bird',
-                <br>description: 'In 2002, an artistically inclined seventeen-year-old girl comes of age in Sacramento, California.',
-                <br>genres: ['Comedy', 'Drama'],
-                <br>director: 'Greta Gerwig',
-                <br>imgURL: '/img.jpg',
-                <br>featured: false
+                <br>Genre: {
+                  <br>Name: "Drama",
+                  <br>Description: "Drama film is a genre that relies on the emotional and relational development of realistic characters."
+                <br>},
+                <br>Director: {
+                  <br>Name: "Wes Anderson",
+                  <br>Bio: "Wesley Wales Anderson is a writer and director who was born in Houston, Texas. He made his first film, Bottle Rocket with Owen Wilson in 1996.",
+                  <br>Birth: "1969-01-01T00:00:00.000Z"
+                <br>},
+                <br>Actors: [],
+                <br>_id: "5d8dc5465782be515e449817",
+                <br>Title: "The Royal Tenenbaums",
+                <br>Description: "Royal and Etheline Tenenbaum had three children and then seperated. Etheline raised the children all of whom were geniuses. Royal retrurns unexpectedly one winter.",
+                <br>ImagePath: "royaltenenbaums.png",
+                <br>Featured: true
                 <br>
               <br>} ]</td>
             </tr>
@@ -56,26 +64,34 @@
               <td>/movies/[movie title]</td>
               <td style="background-color: #ddfada">GET</td>
               <td>N/A</td>
-              <td>JSON object holding data about specific movie.
+              <td>JSON object holding data about specific movie:
                 <p>{
                   <br>
-                  <br>id: '4',
-                  <br>title: 'Lady Bird',
-                  <br>description: 'In 2002, an artistically inclined seventeen-year-old girl comes of age in Sacramento, California.',
-                  <br>genres: ['Comedy', 'Drama'],
-                  <br>director: 'Greta Gerwig',
-                  <br>imgURL: '/img.jpg',
-                  <br>featured: false
+                  <br>Genre: {
+                    <br>Name: "Drama",
+                    <br>Description: "Drama film is a genre that relies on the emotional and relational development of realistic characters."
+                  <br>},
+                  <br>Director: {
+                    <br>Name: "Wes Anderson",
+                    <br>Bio: "Wesley Wales Anderson is a writer and director who was born in Houston, Texas. He made his first film, Bottle Rocket with Owen Wilson in 1996.",
+                    <br>Birth: "1969-01-01"
+                  <br>},
+                  <br>Actors: [],
+                  <br>_id: "5d8dc5465782be515e449817",
+                  <br>Title: "The Royal Tenenbaums",
+                  <br>Description: "Royal and Etheline Tenenbaum had three children and then seperated. Etheline raised the children all of whom were geniuses. Royal retrurns unexpectedly one winter.",
+                  <br>ImagePath: "royaltenenbaums.png",
+                  <br>Featured: true
                   <br>
                 <br>}</td>
               </tr>
 
               <tr>
                   <td>Get description of genre by genre name.</td>
-                  <td>/genres/[genre name]</td>
+                  <td>movies/genres/[genre name]</td>
                   <td style="background-color: #ddfada">GET</td>
                   <td>N/A</td>
-                  <td>JSON object holding name and description of specific genre.
+                  <td>JSON object holding name and description of specific genre:
                     <p>{
                       <br>name: 'Drama',
                       <br>description: 'Drama film is a genre that relies on the emotional and relational development of realistic characters. While Drama film relies heavily on this kind of development, dramatic themes play a large role in the plot as well. Often, these dramatic themes are taken from intense, real life issues.'
@@ -84,15 +100,15 @@
 
               <tr>
                 <td>Get data about specific director by director name.</td>
-                <td>/directors/[director name]</td>
+                <td>movies/directors/[director name]</td>
                 <td style="background-color: #ddfada">GET</td>
                 <td>N/A</td>
-                <td>JSON object holding name, bio, DOB and DOD of specific diretor.
+                <td>JSON object holding name, bio, DOB and DOD of specific diretor:
                   <p>{
                     <br>name: 'Spike Jonze',
                     <br>bio:'Spike Jonze made up one-third (along with Andy Jenkins and Mark Lewman) of the triumvirate of genius minds behind Dirt Magazine, the brother publication of the much lamented ground-breaking Sassy Magazine. These three uncommon characters were all editors for Grand Royal Magazine as well, under the direction of Mike D and Adam Horovitz and Adam Yauch before the sad demise of Grand Royal Records. Jonze was also responsible for directing the famous Beastie Boys: Sabotage (1994) short film as well as numerous other music videos for various artists.',
-                    <br>born: '1969',
-                    <br>died: '-'
+                    <br>birth: '1969',
+                    <br>death: '-'
                   <br>}</td>
                 </tr>
 
@@ -100,55 +116,85 @@
                   <td>Allow new users to register.</td>
                   <td>/users</td>
                   <td style="background-color: #f7dafa">POST</td>
-                  <td>JSON object containing new user data.
+                  <td>JSON object containing new user data:
                     <p>{
-                      <br>name: 'Jeff magnum',
+                      <br>username: 'Jeffmagnum',
                       <br>email: 'jeffmagnum@neutralmilkmal.com',
                       <br>password: '123456',
-                      <br>dob: '24.10.1970',
-                      <br>favourites: []
+                      <br>birthday: '24.10.1970'
                       <br>} </td>
-                  <td>JSON object containing new user data that was added plus a generated unique ID.
+                  <td>JSON object containing new user data that was added plus a generated unique ID:
                     <p>{
-                      <br>name: 'Jeff magnum',
+                      <br>username: 'Jeffmagnum',
                       <br>email: 'jeffmagnum@neutralmilkmail.com',
                       <br>password: '123456',
-                      <br>dob: '24.10.1970',
+                      <br>birthday: '24.10.1970',
                       <br>favourites: []
                       <br>id: "3cbc4a12-b728-4f98-aee4-458134a9a009"
                       <br>} </td>
                 </tr>
 
                 <tr>
-                  <td>Allow users to update own user information, e.g. password.</td>
-                  <td>/users/[user ID]/[new password]</td>
+                  <td>Allow users to update user information</td>
+                  <td>/users/[username]</td>
                   <td style="background-color: #dafaf7">PUT</td>
-                  <td>N/A</td>
-                  <td>Text message indicating if information was successfully updated.  </td>
+                  <td>JSON object containing updated user information:
+                    <p>{
+                      <br>username: 'Jeffmagnum',
+                      <br>email: 'jeffmagnum@neutralmilkmal.com',
+                      <br>password: 'pickles',
+                      <br>birthday: '24.10.1970'
+                      <br>}</td>
+                  <td>JSON object containing updated user data:
+                    <p>{
+                      <br>username: 'Jeffmagnum',
+                      <br>email: 'jeffmagnum@neutralmilkmail.com',
+                      <br>password: 'pickles',
+                      <br>birthday: '24.10.1970',
+                      <br>favourites: []
+                      <br>id: "3cbc4a12-b728-4f98-aee4-458134a9a009"
+                      <br>} </td>
                 </tr>
 
                 <tr>
                   <td>Allow users to add movies to own favourites lists.</td>
-                  <td>/users/[user ID]/favourites/[movie title]</td>
+                  <td>/users/[username]/movies/[movieID]</td>
                   <td style="background-color: #f7dafa">POST</td>
                   <td>N/A</td>
-                  <td>Text message indicating if movie was successfully added to favourites list.  </td>
+                  <td>JSON object containing updated user information with favourites list including newly added movieID:
+                    <p>{
+                      <br>name: 'Jeff magnum',
+                      <br>email: 'jeffmagnum@neutralmilkmail.com',
+                      <br>password: '123456',
+                      <br>birthday: '24.10.1970',
+                      <br>favourites: ["5d8ddbc95782be515e44981f", "5d8dc5465782be515e449817"]
+                      <br>id: "3cbc4a12-b728-4f98-aee4-458134a9a009"
+                      <br>} </td></td>
                 </tr>
 
                 <tr>
                   <td>Allow users to delete movies from own favourites lists.</td>
-                  <td>/users/[user ID]/favourites/[movie title]</td>
+                  <td>/users/[username]/movies/[movieID]</td>
                   <td style="background-color: #fadadd">DELETE</td>
                   <td>N/A</td>
-                  <td>Text message indicating if movie was successfully deleted from favourites list.  </td>
+                  <td>JSON object containing updated user information with amended favourites list:
+                  <p> {
+                    <br>Favourites: ["5d8ddbc95782be515e44981f"],
+                    <br>_id: "5d91c02fb0e38002043cb042",
+                    <br>Username: "StanleyMeowskers",
+                    <br>Password: "purr1245",
+                    <br>Email: "stanley@mewmail.co.uk",
+                    <br>Birthday: "2012-07-21"
+                    <br>}</td>
                 </tr>
 
                 <tr>
                   <td>Allow users to deregister & delete own data from database.</td>
-                  <td>/users/[user ID]</td>
+                  <td>/users/[username]</td>
                   <td style="background-color: #fadadd">DELETE</td>
                   <td>N/A</td>
-                  <td>Text message indicating if user was successfully deregistered & deleted from database.  </td>
+                  <td>Text message indicating if user was successfully deregistered & deleted from database:
+                      <p> "User: StanleyMeowskers was successfully deleted."</p></td>
                 </tr>
 
 
