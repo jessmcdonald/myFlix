@@ -15,7 +15,8 @@ require('./passport');
 
 var auth = require('./auth')(app);
 
-mongoose.connect('mongodb://localhost:27017/myFlixDB', { useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false });
+mongoose.connect('mongodb+srv://myFlixDBAdmin:MyFlixDB@sleepyjess-tftph.mongodb.net/myFlixDB?retryWrites=true&w=majority', { useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false });
+//mongoose.connect('mongodb://localhost:27017/myFlixDB', { useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false });
 
 //middleware functions
 app.use(express.static('public'));
