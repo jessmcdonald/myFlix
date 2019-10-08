@@ -1,4 +1,5 @@
-const express = require('express'),
+const cors = require('cors'),
+      express = require('express'),
       bodyParser = require('body-parser'),
       uuid = require('uuid'),
       mongoose = require('mongoose'),
@@ -7,24 +8,20 @@ const express = require('express'),
 const Movies = Models.Movie;
 const Users = Models.User;
 
-mongoose.connect('mongodb://localhost:27017/myFlixDB', { useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false });
-
+const { check, validationResult } = require('express-validator');
 const app = express();
-
-app.use(bodyParser.json());
-
-var auth = require('./auth')(app);
-
-app.use(express.static('public'));
-
-
-
 const passport = require('passport');
 require('./passport');
 
+var auth = require('./auth')(app);
 
+mongoose.connect('mongodb://localhost:27017/myFlixDB', { useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false });
 
-//middleware function handling errors
+//middleware functions
+app.use(express.static('public'));
+app.use(bodyParser.json());
+app.use('cors'());
+
 app.use(function(err, req, res, next) {
   console.error(err.stack);
   res.status(500).send('Something went wrong!');
@@ -133,8 +130,21 @@ app.get('/users/:Username', passport.authenticate('jwt', { session: false }), fu
   Birthday : Date
 }*/
 
-app.post('/users', function(req, res) {
+app.post('/users',
+  [check('Username', 'Username is required').isLength({min: 5}),
+  check ('Username', 'Username containtains non alphanumeric characters - not allowed.').isAlphanumeric(),
+  check('Password', 'Password is required').not().isEmpty(),
+  check('Email', 'Email does not appear to be valid').isEmail()],
+  (req, res) => {
+
+    var errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+
   var hashedPassword = Users.hashPassword(req.body.Password);
+
   Users.findOne({ Username : req.body.Username })
   .then(function(user) {
     if (user) {
@@ -171,7 +181,21 @@ app.post('/users', function(req, res) {
   Birthday: Date
 }*/
 
-app.put('/users/:Username', passport.authenticate('jwt', { session: false }), function(req, res) {
+app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
+  check('Username', 'Username is required').isLength({min: 5}),
+  check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+  check('Password', 'Password is required').not().isEmpty(),
+  check('Email', 'Email does not appear to be valid').isEmail()],
+(req, res) => {
+
+  var errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
+
+  var hashedPassword = Users.hashPassword(req.body.Password);
+
   Users.findOneAndUpdate({ Username : req.params.Username }, { $set :
   {
     Username : req.body.Username,
