@@ -20,7 +20,7 @@ mongoose.connect('mongodb://localhost:27017/myFlixDB', { useUnifiedTopology: tru
 //middleware functions
 app.use(express.static('public'));
 app.use(bodyParser.json());
-app.use('cors'());
+app.use(cors());
 
 app.use(function(err, req, res, next) {
   console.error(err.stack);
@@ -199,7 +199,7 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
   Users.findOneAndUpdate({ Username : req.params.Username }, { $set :
   {
     Username : req.body.Username,
-    Password : req.body.Password,
+    Password : hashedPassword,
     Email : req.body.Email,
     Birthday : req.body.Birthday
   }},
