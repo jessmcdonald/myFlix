@@ -1,0 +1,49 @@
+$black: #000;
+$indigo: #2a1a5e;
+$orange: #f45905;
+$mustard: #fb9224;
+$yellow: #fbe555;
+$white: #fff;
+
+
+
+.login-button {
+    background-color: $orange;
+    width: 205px;
+    border: 2px solid $indigo;
+}
+
+.register-button {
+    background-color: $orange;
+    width: 205px;
+    border: 2px solid $indigo;
+}
+
+.register-button:hover {
+    color: $indigo;
+    background-color: $mustard;
+    width: 205px;
+    border: 2px solid $indigo;
+}
+
+.login-button:hover {
+    color: $indigo;
+    background-color: $mustard;
+    width: 205px;
+    border: 2px solid $indigo;
+}
+
+.register-div {
+    padding-top: 50px;
+}
+
+.login-box {
+    background-color: $white;
+    width: 30%;
+    padding: 50px;
+  
+   }
+
+   .login-page {
+       padding-bottom: 120px;
+   }

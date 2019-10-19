@@ -1,5 +1,10 @@
-$color: plum;
+$black: #000;
+$indigo: #2a1a5e;
+$orange: #f45905;
+$mustard: #fb9224;
+$yellow: #fbe555;
 
-.main-view {
-    color: $color;
+.app-container{
+    background-color: $indigo;
+    align-content: center;
 }

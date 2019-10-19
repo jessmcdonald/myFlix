@@ -1,0 +1,35 @@
+$black: #000;
+$indigo: #2a1a5e;
+$orange: #f45905;
+$mustard: #fb9224;
+$yellow: #fbe555;
+$white: #fff;
+
+.navbar {
+    background-color: $orange;
+    margin-bottom: 40px;
+
+}
+
+.navlink:hover {
+    background-color: $mustard;
+}
+
+.nav-dropdown {
+    float: left;
+}
+
+.card-row {
+    margin-bottom: 40px;
+}
+
+.card-deck {
+    margin-left: 60px;
+    margin-right: 60px;
+}
+
+
+
+
+
+

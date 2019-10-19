@@ -1,0 +1,35 @@
+$black: #000;
+$white: #fff;
+$indigo: #2a1a5e;
+$orange: #f45905;
+$mustard: #fb9224;
+$yellow: #fbe555;
+
+.label {
+    font-weight: bold;
+    text-align: right;
+}
+
+.movie-img  {
+    width: 80%;
+}
+
+.back-button {
+    background-color: $orange;
+    width: 205px;
+    border: 2px solid $indigo;
+}
+
+.back-button:hover {
+    color: $indigo;
+    background-color: $mustard;
+    width: 205px;
+    border: 2px solid $indigo;
+}
+
+.movie-details {
+    width: 60%;
+    background-color: $white;
+    padding: 50px;
+    margin-bottom: 50px;
+}

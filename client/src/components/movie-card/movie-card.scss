@@ -1,0 +1,22 @@
+$black: #000;
+$indigo: #2a1a5e;
+$orange: #f45905;
+$mustard: #fb9224;
+$yellow: #fbe555;
+
+.view-movie-button {
+    background-color: $orange;
+    width: 205px;
+    border: 2px solid $indigo;
+}
+
+.view-movie-button:hover {
+    color: $indigo;
+    background-color: $mustard;
+    width: 205px;
+    border: 2px solid $indigo;
+}
+
+.movie-card {
+    margin-bottom: 40px;
+}

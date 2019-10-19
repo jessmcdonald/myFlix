@@ -2,6 +2,16 @@ import React from 'react';
 import axios from 'axios';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
+import { LoginView } from '../login-view/login-view';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import CardDeck from 'react-bootstrap/Carddeck';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import logo from '../../../img/logo.png';
+import './main-view.scss';
 
 export class MainView extends React.Component {
 
@@ -12,7 +22,9 @@ export class MainView extends React.Component {
         //init state to empty object so can be destructured later
         this.state = {
             movies: null,
-            selectedMovie: null
+            selectedMovie: null,
+            user: null,
+            register: null
         };
     }
 
@@ -35,22 +47,35 @@ export class MainView extends React.Component {
         });
     }
 
+    onLoggedIn(user) {
+        this.setState({
+            user
+        });
+    }
+
     render() {
         //if state not initialised this will throw on runtime
         //before data is initially loaded
-        const { movies, selectedMovie } = this.state;
+        const { movies, selectedMovie, user } = this.state;
+
+        if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
 
         //before movies loaded
         if (!movies) return <div className="main-view" />;
 
+        //TODO nav routing
         return (
             <div className="main-view">
-                {selectedMovie
-                    ? <MovieView movie={selectedMovie} />
-                    : movies.map(movie => (
-                        <MovieCard key={movie._id} movie={movie} onClick={movie => this.onMovieClick(movie)} />
-                    ))
-                }
+                <div className="card-deck-div">
+                    <CardDeck className="card-deck">
+                        {selectedMovie
+                            ? <MovieView movie={selectedMovie} />
+                            : movies.map(movie => (
+                                <Row className="card-row"><Col><MovieCard key={movie._id} movie={movie} onClick={movie => this.onMovieClick(movie)} /></Col></Row>
+                            ))
+                        }
+                    </CardDeck>
+                </div >
             </div>
         );
     }
