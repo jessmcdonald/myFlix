@@ -13,8 +13,6 @@ const app = express();
 const passport = require('passport');
 require('./passport');
 
-var auth = require('./auth')(app);
-
 mongoose.connect('mongodb+srv://myFlixDBAdmin:MyFlixDB@sleepyjess-tftph.mongodb.net/myFlixDB?retryWrites=true&w=majority', { useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false });
 //mongoose.connect('mongodb://localhost:27017/myFlixDB', { useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false });
 
@@ -36,6 +34,7 @@ app.use(cors({
 app.use(express.static('public'));
 app.use(bodyParser.json());
 
+var auth = require('./auth')(app);
 
 app.use(function (err, req, res, next) {
   console.error(err.stack);
