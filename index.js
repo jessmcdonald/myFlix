@@ -108,7 +108,7 @@ app.get('/movies/directors/:Name', passport.authenticate('jwt', { session: false
 
 // Get all users
 
-app.get('/users', passport.authenticate('jwt', { session: false }), function (req, res) {
+app.get('/users', function (req, res) {
 
   Users.find()
     .then(function (users) {
