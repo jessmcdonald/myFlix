@@ -5,6 +5,8 @@ import logo from '../img/logo.png';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
 
 import { MainView } from './components/main-view/main-view';
 
@@ -13,6 +15,16 @@ import './index.scss';
 
 //main component
 class MyFlixApplication extends React.Component {
+
+    onLoggedOut() {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        this.setState({
+            user: null
+        })
+    }
+
+
     render() {
         return <div className="app">
             <Navbar className="navbar" expand="lg" sticky="top">
@@ -28,8 +40,8 @@ class MyFlixApplication extends React.Component {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto">
-                            <Nav.Link href="#home" className="navlink">Home</Nav.Link>
-                            <Nav.Link href="#home" className="navlink">Movies</Nav.Link>
+                            <Nav.Link href="/" className="navlink">Home</Nav.Link>
+                            <Nav.Link href="/" className="navlink">Movies</Nav.Link>
                             <Nav.Link href="#home" className="navlink">Directors</Nav.Link>
                             <Nav.Link href="#home" className="navlink">Genres</Nav.Link>
                         </Nav>
@@ -43,14 +55,14 @@ class MyFlixApplication extends React.Component {
                                 <NavDropdown.Item href="#mymovies" className="navlink">My Movies</NavDropdown.Item>
                                 <NavDropdown.Item href="#mysettings" className="navlink">Account settings</NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item href="#logout" className="navlink">Logout</NavDropdown.Item>
+                                <NavDropdown.Item href="/" className="navlink" onClick={() => this.onLoggedOut()}>Logout</NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
             <MainView />
-        </div>
+        </div >
     }
 }
 
