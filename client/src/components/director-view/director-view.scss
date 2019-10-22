@@ -9,25 +9,12 @@ body {
     background-color: $indigo;
 }
 
-.label {
-    font-weight: bold;
-    text-align: right;
-}
-
 .title {
     padding-left: 0px;
 }
 
-.go-back-col {
-    text-align: right;
-}
-
-.movie-details-row {
+.director-details-row {
     margin-bottom: 20px;
-}
-
-.movie-img  {
-    width: 100%;
 }
 
 .back-button {
@@ -43,19 +30,15 @@ body {
     border: 2px solid $indigo;
 }
 
-.movie-details {
+.director-details {
     width: 60%;
     background-color: $white;
     padding: 50px;
     margin-bottom: 50px;
 }
 
-.genre-director-links {
-    padding-left: 0px;
-}
 
-.genre-director-links:hover {
-    background-color: $mustard;
-}
+
+
 
 

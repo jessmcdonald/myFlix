@@ -23,6 +23,10 @@ body {
   text-align: right;
 }
 
+.title {
+  padding-left: 0px;
+}
+
 .go-back-col {
   text-align: right;
 }
@@ -109,6 +113,93 @@ body {
 
 .login-page {
   padding-bottom: 120px;
+}
+.view-movie-button {
+  background-color: #f45905;
+  width: 205px;
+  border: 2px solid #2a1a5e;
+}
+
+.view-movie-button:hover {
+  color: #2a1a5e;
+  background-color: #fb9224;
+  width: 205px;
+  border: 2px solid #2a1a5e;
+}
+
+.mini-movie-card {
+  margin-bottom: 20px;
+}
+
+.movie-link {
+  font-size: 10pt;
+}
+
+.movie-link:hover {
+  background-color: #fb9224;
+  color: #2a1a5e;
+}
+body {
+  background-color: #2a1a5e;
+}
+
+.title {
+  padding-left: 0px;
+}
+
+.director-details-row {
+  margin-bottom: 20px;
+}
+
+.back-button {
+  background-color: #f45905;
+  width: 205px;
+  border: 2px solid #2a1a5e;
+}
+
+.back-button:hover {
+  color: #2a1a5e;
+  background-color: #fb9224;
+  width: 205px;
+  border: 2px solid #2a1a5e;
+}
+
+.director-details {
+  width: 60%;
+  background-color: #fff;
+  padding: 50px;
+  margin-bottom: 50px;
+}
+body {
+  background-color: #2a1a5e;
+}
+
+.title {
+  padding-left: 0px;
+}
+
+.genre-details-row {
+  margin-bottom: 20px;
+}
+
+.back-button {
+  background-color: #f45905;
+  width: 205px;
+  border: 2px solid #2a1a5e;
+}
+
+.back-button:hover {
+  color: #2a1a5e;
+  background-color: #fb9224;
+  width: 205px;
+  border: 2px solid #2a1a5e;
+}
+
+.genre-details {
+  width: 60%;
+  background-color: #fff;
+  padding: 50px;
+  margin-bottom: 50px;
 }
 .navbar {
   background-color: #f45905;

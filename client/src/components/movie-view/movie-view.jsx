@@ -18,8 +18,6 @@ export class MovieView extends React.Component {
         this.state = {};
     }
 
-
-
     render() {
         const { movie } = this.props;
 
@@ -40,11 +38,11 @@ export class MovieView extends React.Component {
                         <Col sm={7}>
                             <Row className="movie-details-row">
                                 <Col className="label">Description</Col>
-                                <Col classname="value">{movie.Description}</Col>
+                                <Col className="value">{movie.Description}</Col>
                             </Row>
                             <Row className="movie-details-row">
                                 <Col className="label">Genre</Col>
-                                <Col classname="value">
+                                <Col className="value">
                                     <Row>
                                         <Col>
                                             {movie.Genre.Name}
@@ -61,8 +59,10 @@ export class MovieView extends React.Component {
                             </Row>
                             <Row className="movie-details-row">
                                 <Col className="label">Director</Col>
-                                <Col classname="value">
-                                    <Row>{movie.Director.Name}
+                                <Col className="value">
+                                    <Row>
+                                        <Col>{movie.Director.Name}
+                                        </Col>
                                     </Row>
                                     <Row>
                                         <Col>
@@ -79,11 +79,7 @@ export class MovieView extends React.Component {
                             </Row>
                         </Col>
                     </Row>
-
-
-
                 </Container >
-                <p></p>
             </div >
         );
     }
