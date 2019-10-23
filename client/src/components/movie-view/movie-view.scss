@@ -22,6 +22,9 @@ body {
     text-align: right;
 }
 
+.add-to-fav {
+    text-align: right;
+}
 .movie-details-row {
     margin-bottom: 20px;
 }
@@ -37,6 +40,19 @@ body {
 }
 
 .back-button:hover {
+    color: $indigo;
+    background-color: $mustard;
+    width: 205px;
+    border: 2px solid $indigo;
+}
+
+.favourite-button {
+    background-color: $mustard;
+    width: 205px;
+    border: 2px solid $indigo;
+}
+
+.favourite-button:hover {
     color: $indigo;
     background-color: $mustard;
     width: 205px;

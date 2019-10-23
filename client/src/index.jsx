@@ -42,8 +42,8 @@ class MyFlixApplication extends React.Component {
                         <Nav className="mr-auto">
                             <Nav.Link href="/" className="navlink">Home</Nav.Link>
                             <Nav.Link href="/" className="navlink">Movies</Nav.Link>
-                            <Nav.Link href="#home" className="navlink">Directors</Nav.Link>
-                            <Nav.Link href="#home" className="navlink">Genres</Nav.Link>
+                            <Nav.Link href="#home" eventKey="disabled" className="navlink">Directors</Nav.Link>
+                            <Nav.Link href="#home" eventKey="disabled" className="navlink">Genres</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
@@ -52,8 +52,8 @@ class MyFlixApplication extends React.Component {
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ml-auto">
                             <NavDropdown title="MyFlix Account" id="basic-nav-dropdown" className="nav-dropdown">
-                                <NavDropdown.Item href="#mymovies" className="navlink">My Movies</NavDropdown.Item>
-                                <NavDropdown.Item href="#mysettings" className="navlink">Account settings</NavDropdown.Item>
+                                <NavDropdown.Item href="/userprofile" className="navlink">My Movies</NavDropdown.Item>
+                                <NavDropdown.Item href="/userprofile" className="navlink">Account settings</NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item href="/" className="navlink" onClick={() => this.onLoggedOut()}>Logout</NavDropdown.Item>
                             </NavDropdown>

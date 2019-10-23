@@ -1,4 +1,6 @@
 import React from 'react';
+import axios from 'axios';
+
 import { MainView } from '../main-view/main-view';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
@@ -10,18 +12,44 @@ import { Link } from "react-router-dom";
 
 import './movie-view.scss';
 
+
 export class MovieView extends React.Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+        this.state = {
+        };
+    }
 
-        this.state = {};
+    componentDidMount() {
+        let accessToken = localStorage.getItem('token');
+        if (accessToken !== null) {
+            this.addFavouriteMovie(accessToken);
+        }
+    }
+
+    addFavouriteMovie(movieId) {
+        let username = localStorage.getItem('user');
+        let token = localStorage.getItem('token');
+
+        axios.post(`https://myflixmovies.herokuapp.com/users/${username}/Movies/${movieId}`, {
+            headers: { Authorization: `Bearer ${token}` }
+        })
+            .then(response => {
+                alert('movie was added to your favourites');
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
     }
 
     render() {
+
         const { movie } = this.props;
 
         if (!movie) return null;
+
+        console.log(movie);
 
         return (
             <div className="movie-view">
@@ -74,6 +102,11 @@ export class MovieView extends React.Component {
                                 </Col>
                             </Row>
                             <Row className="movie-details-row">
+                                <Col className="add-to-fav">
+                                    <Button className="favourite-button" size='sm' onClick={e => this.addFavouriteMovie(movie._id)}>Add movie to favourites</Button>
+                                </Col>
+                            </Row>
+                            <Row className="movie-details-row">
                                 <Col className="go-back-col">
                                     <Link to={`/`}><Button className="back-button">Go back to movie list</Button></Link></Col>
                             </Row>
@@ -84,6 +117,7 @@ export class MovieView extends React.Component {
         );
     }
 }
+
 
 
 MovieView.propTypes = {

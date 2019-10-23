@@ -31,6 +31,10 @@ body {
   text-align: right;
 }
 
+.add-to-fav {
+  text-align: right;
+}
+
 .movie-details-row {
   margin-bottom: 20px;
 }
@@ -46,6 +50,19 @@ body {
 }
 
 .back-button:hover {
+  color: #2a1a5e;
+  background-color: #fb9224;
+  width: 205px;
+  border: 2px solid #2a1a5e;
+}
+
+.favourite-button {
+  background-color: #fb9224;
+  width: 205px;
+  border: 2px solid #2a1a5e;
+}
+
+.favourite-button:hover {
   color: #2a1a5e;
   background-color: #fb9224;
   width: 205px;
@@ -139,6 +156,12 @@ body {
   background-color: #fb9224;
   color: #2a1a5e;
 }
+
+.minimoviecard-img {
+  width: 100%;
+  height: 17vw;
+  object-fit: cover;
+}
 body {
   background-color: #2a1a5e;
 }
@@ -200,6 +223,57 @@ body {
   background-color: #fff;
   padding: 50px;
   margin-bottom: 50px;
+}
+.deregister-div {
+  padding-top: 50px;
+}
+
+.favourites-div {
+  margin-top: 30px;
+}
+
+.greeting {
+  margin-bottom: 30px;
+}
+
+.profile-box {
+  background-color: #fff;
+  width: 70%;
+  padding: 50px;
+}
+
+.remove-favourite-button {
+  background-color: #f45905;
+  border: 2px solid #2a1a5e;
+  display: inline-block;
+  margin-top: 5px;
+}
+
+.remove-favourite-button:hover {
+  color: #2a1a5e;
+  background-color: #fb9224;
+  border: 2px solid #2a1a5e;
+}
+
+.favourite-movie {
+  text-align: center;
+}
+
+.deregister-div-warning {
+  color: #d80000;
+}
+
+.deregister-button {
+  background-color: #720000;
+  border: 2px solid #2a1a5e;
+  display: inline-block;
+  margin-top: 5px;
+}
+
+.deregister-button:hover {
+  color: #000;
+  background-color: #d80000;
+  border: 2px solid #2a1a5e;
 }
 .navbar {
   background-color: #f45905;

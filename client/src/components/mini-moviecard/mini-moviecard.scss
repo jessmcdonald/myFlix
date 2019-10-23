@@ -29,3 +29,9 @@ $yellow: #fbe555;
     background-color: $mustard;
     color: $indigo;
 }
+
+.minimoviecard-img {
+    width: 100%;
+    height: 17vw;
+    object-fit: cover;
+}
