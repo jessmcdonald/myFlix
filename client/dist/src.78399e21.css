@@ -258,6 +258,40 @@ body {
 .favourite-movie {
   text-align: center;
 }
+.deregister-div {
+  padding-top: 50px;
+}
+
+.favourites-div {
+  margin-top: 30px;
+}
+
+.greeting {
+  margin-bottom: 30px;
+}
+
+.profile-box {
+  background-color: #fff;
+  width: 70%;
+  padding: 50px;
+}
+
+.edit-button {
+  background-color: #f45905;
+  border: 2px solid #2a1a5e;
+  display: inline-block;
+  margin-top: 5px;
+}
+
+.edit-button:hover {
+  color: #2a1a5e;
+  background-color: #fb9224;
+  border: 2px solid #2a1a5e;
+}
+
+.favourite-movie {
+  text-align: center;
+}
 
 .deregister-div-warning {
   color: #d80000;

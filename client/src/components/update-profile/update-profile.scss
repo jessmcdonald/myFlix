@@ -1,0 +1,60 @@
+$black: #000;
+$indigo: #2a1a5e;
+$orange: #f45905;
+$mustard: #fb9224;
+$yellow: #fbe555;
+$white: #fff;
+$darkred: #720000;
+$lightred: #d80000;
+
+.deregister-div {
+    padding-top: 50px;
+}
+
+.favourites-div {
+    margin-top: 30px;
+}
+
+.greeting {
+    margin-bottom: 30px;
+}
+
+.profile-box {
+    background-color: $white;
+    width: 70%;
+    padding: 50px;
+     }
+
+.edit-button {
+    background-color: $orange;
+    border: 2px solid $indigo;
+    display: inline-block;
+    margin-top: 5px;
+}
+    
+.edit-button:hover {
+    color: $indigo;
+    background-color: $mustard;
+    border: 2px solid $indigo;
+    }
+
+.favourite-movie {
+    text-align: center;
+}
+
+.deregister-div-warning {
+    color: $lightred;
+}
+
+.deregister-button {
+    background-color: $darkred;
+    border: 2px solid $indigo;
+    display: inline-block;
+    margin-top: 5px;
+}
+    
+.deregister-button:hover {
+    color: $black;
+    background-color: $lightred;
+    border: 2px solid $indigo;
+    }

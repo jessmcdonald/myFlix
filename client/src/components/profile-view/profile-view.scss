@@ -42,19 +42,3 @@ $lightred: #d80000;
     text-align: center;
 }
 
-.deregister-div-warning {
-    color: $lightred;
-}
-
-.deregister-button {
-    background-color: $darkred;
-    border: 2px solid $indigo;
-    display: inline-block;
-    margin-top: 5px;
-}
-    
-.deregister-button:hover {
-    color: $black;
-    background-color: $lightred;
-    border: 2px solid $indigo;
-    }
