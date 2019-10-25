@@ -14,6 +14,8 @@ import './profile-view.scss';
 
 export class ProfileView extends React.Component {
 
+    _mount = false
+
     constructor(props) {
         //call superclass constructor so React can initialise it
         super(props);
@@ -30,11 +32,16 @@ export class ProfileView extends React.Component {
     }
 
     componentDidMount() {
+        this._mount = true;
         let accessToken = localStorage.getItem('token');
         if (accessToken !== null) {
             this.deleteFavouriteMovie(accessToken);
             this.getUser(accessToken);
         }
+    }
+
+    componentWillUnmount() {
+        this._mount = false;
     }
 
     getUser(token) {
@@ -43,14 +50,16 @@ export class ProfileView extends React.Component {
             headers: { Authorization: `Bearer ${token}` }
         })
             .then(response => {
-                this.setState({
-                    userData: response.data,
-                    username: response.data.Username,
-                    password: response.data.Password,
-                    email: response.data.Email,
-                    birthday: response.data.Birthday,
-                    favouriteMovies: response.data.Favourites
-                });
+                if (this._mount) {
+                    this.setState({
+                        userData: response.data,
+                        username: response.data.Username,
+                        password: response.data.Password,
+                        email: response.data.Email,
+                        birthday: response.data.Birthday,
+                        favouriteMovies: response.data.Favourites
+                    });
+                }
             })
             .catch(function (error) {
                 console.log(error);

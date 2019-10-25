@@ -32,8 +32,11 @@ export class MovieView extends React.Component {
         let username = localStorage.getItem('user');
         let token = localStorage.getItem('token');
 
-        axios.post(`https://myflixmovies.herokuapp.com/users/${username}/Movies/${movieId}`, {
-            headers: { Authorization: `Bearer ${token}` }
+        axios.post(`https://myflixmovies.herokuapp.com/users/${username}/Movies/${movieId}`, { "jwt": token }, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
         })
             .then(response => {
                 alert('movie was added to your favourites');

@@ -46638,8 +46638,11 @@ function (_React$Component) {
       var token = localStorage.getItem('token');
 
       _axios.default.post("https://myflixmovies.herokuapp.com/users/".concat(username, "/Movies/").concat(movieId), {
+        "jwt": token
+      }, {
         headers: {
-          Authorization: "Bearer ".concat(token)
+          'Authorization': "Bearer ".concat(token),
+          'Content-Type': 'application/json'
         }
       }).then(function (response) {
         alert('movie was added to your favourites');
@@ -49206,6 +49209,7 @@ function (_React$Component) {
     //call superclass constructor so React can initialise it
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ProfileView).call(this, props)); //init state to empty object so can be destructured later
 
+    _this._mount = false;
     _this.state = {
       userData: null,
       username: null,
@@ -49220,12 +49224,18 @@ function (_React$Component) {
   _createClass(ProfileView, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      this._mount = true;
       var accessToken = localStorage.getItem('token');
 
       if (accessToken !== null) {
         this.deleteFavouriteMovie(accessToken);
         this.getUser(accessToken);
       }
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this._mount = false;
     }
   }, {
     key: "getUser",
@@ -49239,14 +49249,16 @@ function (_React$Component) {
           Authorization: "Bearer ".concat(token)
         }
       }).then(function (response) {
-        _this2.setState({
-          userData: response.data,
-          username: response.data.Username,
-          password: response.data.Password,
-          email: response.data.Email,
-          birthday: response.data.Birthday,
-          favouriteMovies: response.data.Favourites
-        });
+        if (_this2._mount) {
+          _this2.setState({
+            userData: response.data,
+            username: response.data.Username,
+            password: response.data.Password,
+            email: response.data.Email,
+            birthday: response.data.Birthday,
+            favouriteMovies: response.data.Favourites
+          });
+        }
       }).catch(function (error) {
         console.log(error);
       });
@@ -49961,7 +49973,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50950" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62205" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
