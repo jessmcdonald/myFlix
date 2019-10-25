@@ -1,8 +1,13 @@
 import React from 'react';
 import axios from 'axios';
+
+import { connect } from 'react-redux';
+
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import { MovieCard } from '../movie-card/movie-card';
+import { setMovies } from '../../actions/actions';
+
+import MoviesList from '../movies-list/movies-list';
 import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
@@ -11,19 +16,9 @@ import { GenreView } from '../genre-view/genre-view';
 import { ProfileView } from '../profile-view/profile-view';
 import { UpdateProfile } from '../update-profile/update-profile';
 
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import CardDeck from 'react-bootstrap/Carddeck';
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import logo from '../../../img/logo.png';
-import Button from 'react-bootstrap/Button';
-
 import './main-view.scss';
 
-export class MainView extends React.Component {
+class MainView extends React.Component {
 
     constructor(props) {
         //call superclass constructor so React can initialise it
@@ -31,8 +26,7 @@ export class MainView extends React.Component {
 
         //init state to empty object so can be destructured later
         this.state = {
-            movies: [],
-            user: null,
+            user: null
         };
     }
 
@@ -62,6 +56,18 @@ export class MainView extends React.Component {
             });
     }
 
+    getMovies(token) {
+        axios.get('https://myflixmovies.herokuapp.com/movies', {
+            headers: { Authorization: `Bearer ${token}` }
+        })
+            .then(response => {
+                this.props.setMovies(response.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
     onLoggedIn(authData) {
         console.log(authData);
         this.setState({
@@ -81,43 +87,22 @@ export class MainView extends React.Component {
         })
     }
 
-    getMovies(token) {
-        axios.get('https://myflixmovies.herokuapp.com/movies', {
-            headers: { Authorization: `Bearer ${token}` }
-        })
-            .then(response => {
-                //assign result to state
-                this.setState({
-                    movies: response.data
-                });
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    }
-
 
     render() {
         //if state not initialised this will throw on runtime
         //before data is initially loaded
-        const { movies, user, userInfo } = this.state;
+        let { movies } = this.props;
+        let { user, userInfo } = this.state;
 
         console.log(movies);
         console.log(userInfo);
 
-        //before movies loaded
-        if (!movies) return <div className="main-view" />;
-
-        //TODO nav routing
         return (
             <Router>
                 <div className="main-view">
                     <Route exact path="/" render={() => {
                         if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-                        return <div className="card-deck-div"><div className="welcome-div"><h2>Welcome to MyFlix {user}!</h2></div>
-                            <CardDeck className="card-deck">
-                                {movies.map(m => <Row className="card-row"><Col><MovieCard key={m._id} movie={m} /></Col></Row>)
-                                }</CardDeck></div>
+                        return <MoviesList movies={movies} />;
                     }} />
 
                     <Route exact path="/register" render={() => <RegistrationView />} />
@@ -143,4 +128,10 @@ export class MainView extends React.Component {
         );
     }
 }
+
+let mapStateToProps = state => {
+    return { movies: state.movies }
+}
+
+export default connect(mapStateToProps, { setMovies })(MainView);
 
