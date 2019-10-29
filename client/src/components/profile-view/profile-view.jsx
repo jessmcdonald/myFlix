@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import Form from 'react-bootstrap/Form';
@@ -11,6 +11,7 @@ import CardDeck from "react-bootstrap/CardDeck";
 import { MiniMovieCard } from '../mini-moviecard/mini-moviecard';
 
 import './profile-view.scss';
+
 
 export class ProfileView extends React.Component {
 
@@ -91,7 +92,7 @@ export class ProfileView extends React.Component {
         console.log(userData);
 
         return (
-            <div className="profile-view">
+            <div className="profile-view" >
                 <div className="profile-page">
                     <Container className="profile-box">
                         <Row>
@@ -152,4 +153,6 @@ export class ProfileView extends React.Component {
         );
     }
 }
+
+
 

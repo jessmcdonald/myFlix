@@ -20,12 +20,16 @@ const store = createStore(moviesApp);
 //main component
 class MyFlixApplication extends React.Component {
 
-    onLoggedOut() {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
+
+    onLoggedIn(authData) {
+        console.log(authData);
         this.setState({
-            user: null
-        })
+            user: authData.user.Username
+        });
+
+        localStorage.setItem('token', authData.token);
+        localStorage.setItem('user', authData.user.Username);
+        this.getMovies(authData.token);
     }
 
 

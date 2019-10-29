@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import { setMovies } from '../../actions/actions';
+import { setMovies, setUser } from '../../actions/actions';
 
 import MoviesList from '../movies-list/movies-list';
 import { MovieView } from '../movie-view/movie-view';
@@ -32,13 +32,28 @@ class MainView extends React.Component {
 
     componentDidMount() {
         let accessToken = localStorage.getItem('token');
+        let userInfo = localStorage.getItem('userInfo');
         if (accessToken !== null) {
-            this.setState({
-                user: localStorage.getItem('user')
-            });
-            this.getMovies(accessToken);
-            this.getUser(accessToken);
+            this.props.setUser(userInfo);
         }
+        this.setState({
+            user: localStorage.getItem('user')
+        });
+        this.getMovies(accessToken);
+        this.getUser(accessToken);
+    }
+
+
+    getMovies(token) {
+        axios.get('https://myflixmovies.herokuapp.com/movies', {
+            headers: { Authorization: `Bearer ${token}` }
+        })
+            .then(response => {
+                this.props.setMovies(response.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 
     getUser(token) {
@@ -47,21 +62,7 @@ class MainView extends React.Component {
             headers: { Authorization: `Bearer ${token}` }
         })
             .then(response => {
-                this.setState({
-                    userInfo: response.data
-                });
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    }
-
-    getMovies(token) {
-        axios.get('https://myflixmovies.herokuapp.com/movies', {
-            headers: { Authorization: `Bearer ${token}` }
-        })
-            .then(response => {
-                this.props.setMovies(response.data);
+                this.props.setUser(response.data);
             })
             .catch(function (error) {
                 console.log(error);
@@ -87,12 +88,11 @@ class MainView extends React.Component {
         })
     }
 
-
     render() {
         //if state not initialised this will throw on runtime
         //before data is initially loaded
-        let { movies } = this.props;
-        let { user, userInfo } = this.state;
+        const { movies, userInfo } = this.props;
+        let user = this.state;
 
         console.log(movies);
         console.log(userInfo);
@@ -107,7 +107,7 @@ class MainView extends React.Component {
 
                     <Route exact path="/register" render={() => <RegistrationView />} />
 
-                    <Route exact path="/userprofile" render={() => <ProfileView movies={movies} />} />
+                    <Route exact path="/userprofile" render={() => <ProfileView movies={movies} userInfo={userInfo} />} />
 
                     <Route exact path="/editprofile" render={() => <UpdateProfile userInfo={userInfo} />} />
 
@@ -124,14 +124,17 @@ class MainView extends React.Component {
                     }} />
 
                 </div>
-            </Router>
+            </Router >
         );
     }
 }
 
 let mapStateToProps = state => {
-    return { movies: state.movies }
+    return {
+        movies: state.movies,
+        userInfo: state.userInfo
+    }
 }
 
-export default connect(mapStateToProps, { setMovies })(MainView);
+export default connect(mapStateToProps, { setMovies, setUser })(MainView);
 
