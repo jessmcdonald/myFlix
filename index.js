@@ -1,3 +1,5 @@
+const path = require("path");
+
 const cors = require('cors'),
   express = require('express'),
   bodyParser = require('body-parser'),
@@ -32,6 +34,11 @@ app.use(cors({
 
 //middleware functions
 app.use(express.static('public'));
+app.use('/client', express.static(path.join(__dirname, 'dist')));
+app.get("/client/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
+});
+
 app.use(bodyParser.json());
 
 var auth = require('./auth')(app);

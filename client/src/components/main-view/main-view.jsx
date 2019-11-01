@@ -101,7 +101,7 @@ class MainView extends React.Component {
         console.log(userInfo);
 
         return (
-            <Router>
+            <Router basename="/client">
 
                 <Navbar className="navbar" expand="lg" sticky="top">
                     <Container>
