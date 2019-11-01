@@ -1,5 +1,3 @@
-import { SSL_OP_NETSCAPE_REUSE_CIPHER_CHANGE_BUG } from "constants";
-
 export const SET_MOVIES = 'SET_MOVIES';
 export const SET_USER = 'SET_USER';
 export const SET_FILTER = 'SET_FILTER';
@@ -15,3 +13,4 @@ export function setUser(value) {
 export function setFilter(value) {
     return { type: SET_FILTER, value };
 }
+

@@ -14,6 +14,13 @@
 .movie-card {
   margin-bottom: 40px;
 }
+.card-deck-container {
+  padding-top: 20px;
+}
+
+.search-bar {
+  margin: 20px;
+}
 body {
   background-color: #2a1a5e;
 }
@@ -83,15 +90,6 @@ body {
 .genre-director-links:hover {
   background-color: #fb9224;
 }
-.login-div {
-  padding-top: 50px;
-}
-
-.registration-box {
-  background-color: #fff;
-  width: 30%;
-  padding: 50px;
-}
 .login-button {
   background-color: #f45905;
   width: 205px;
@@ -130,6 +128,15 @@ body {
 
 .login-page {
   padding-bottom: 120px;
+}
+.login-div {
+  padding-top: 50px;
+}
+
+.registration-box {
+  background-color: #fff;
+  width: 30%;
+  padding: 50px;
 }
 .view-movie-button {
   background-color: #f45905;

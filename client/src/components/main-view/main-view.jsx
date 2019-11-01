@@ -1,11 +1,13 @@
 import React from 'react';
 import axios from 'axios';
-
 import { connect } from 'react-redux';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import { setMovies, setUser } from '../../actions/actions';
+
+import logo from '../../img/logo.png';
+import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 
 import MoviesList from '../movies-list/movies-list';
 import { MovieView } from '../movie-view/movie-view';
@@ -81,6 +83,7 @@ class MainView extends React.Component {
     }
 
     onLoggedOut() {
+        console.log("logout")
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         this.setState({
@@ -92,13 +95,47 @@ class MainView extends React.Component {
         //if state not initialised this will throw on runtime
         //before data is initially loaded
         const { movies, userInfo } = this.props;
-        let user = this.state;
+        let { user } = this.state;
 
         console.log(movies);
         console.log(userInfo);
 
         return (
             <Router>
+
+                <Navbar className="navbar" expand="lg" sticky="top">
+                    <Container>
+                        < Navbar.Brand href="#home">
+                            <img
+                                alt=""
+                                src={logo}
+                                height="60"
+                                className="d-inline-block align-top"
+                            />{' '}
+                        </Navbar.Brand>
+                        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                        <Navbar.Collapse id="basic-navbar-nav">
+                            <Nav className="mr-auto">
+                                <Nav.Link href="/" className="navlink">Home</Nav.Link>
+                                <Nav.Link href="/" className="navlink">Movies</Nav.Link>
+                            </Nav>
+                        </Navbar.Collapse>
+                    </Container>
+                    <Container>
+                        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                        <Navbar.Collapse id="basic-navbar-nav">
+                            <Nav className="ml-auto">
+                                <NavDropdown title="MyFlix Account" id="basic-nav-dropdown" className="nav-dropdown">
+                                    <NavDropdown.Item href="/userprofile" className="navlink">My Movies</NavDropdown.Item>
+                                    <NavDropdown.Item href="/userprofile" className="navlink">Account settings</NavDropdown.Item>
+                                    <NavDropdown.Divider />
+                                    <NavDropdown.Item href="/" className="navlink" onClick={() => this.onLoggedOut()}>Logout</NavDropdown.Item>
+                                </NavDropdown>
+                            </Nav>
+                        </Navbar.Collapse>
+                    </Container>
+                </Navbar>
+
                 <div className="main-view">
                     <Route exact path="/" render={() => {
                         if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
@@ -125,7 +162,7 @@ class MainView extends React.Component {
 
                 </div>
             </Router >
-        );
+        )
     }
 }
 

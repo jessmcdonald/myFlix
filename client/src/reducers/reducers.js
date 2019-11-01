@@ -36,3 +36,4 @@ const moviesApp = combineReducers({
 });
 
 export default moviesApp;
+

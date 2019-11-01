@@ -4,14 +4,8 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import logo from '../../../img/logo.png';
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-
-import { RegistrationView } from '../registration-view/registration-view';
 import { Link } from 'react-router-dom';
 
 import './login-view.scss';
