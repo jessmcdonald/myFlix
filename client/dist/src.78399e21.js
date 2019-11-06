@@ -57465,7 +57465,9 @@ function (_React$Component) {
       var user = this.state.user;
       console.log(movies);
       console.log(userInfo);
-      return _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement(_reactBootstrap.Navbar, {
+      return _react.default.createElement(_reactRouterDom.BrowserRouter, {
+        basename: "/client"
+      }, _react.default.createElement(_reactBootstrap.Navbar, {
         className: "navbar",
         expand: "lg",
         sticky: "top"
@@ -57725,7 +57727,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56366" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49632" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
