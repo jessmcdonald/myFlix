@@ -42,7 +42,7 @@ app.use(
 app.use(express.static("public"));
 app.use(express.static(__dirname + "/public"));
 app.use("/client", express.static(path.join(__dirname, "dist")));
-app.get("/client/*", (req, res) => {
+app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
