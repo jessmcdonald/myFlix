@@ -41,6 +41,11 @@ app.use(
 //middleware functions
 app.use(express.static("public"));
 app.use(express.static(__dirname + "/public"));
+app.use("/client", express.static(path.join(__dirname, "dist")));
+app.get("/client/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
+});
+
 app.use(bodyParser.json());
 
 var auth = require("./auth")(app);
@@ -337,12 +342,6 @@ app.delete(
       });
   }
 );
-
-//deploy to heroku
-app.use("/client", express.static(path.join(__dirname, "dist")));
-app.get("/client/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "dist", "index.html"));
-});
 
 var port = process.env.PORT || 3000;
 app.listen(port, "0.0.0.0", function() {
