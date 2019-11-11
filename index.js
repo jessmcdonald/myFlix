@@ -39,12 +39,24 @@ app.use(
 );
 
 //middleware functions
+
 app.use(express.static("public"));
 app.use(express.static(__dirname + "/public"));
-app.use("/client", express.static(path.join(__dirname, "dist")));
-app.get("*", (req, res) => {
+if (process.env.NODE_ENV === "production") {
+  // Exprees will serve up production assets
+  app.use(express.static("client/dist"));
+
+  // Express serve up index.html file if it doesn't recognize route
+  const path = require("path");
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "dist", "index.html"));
+  });
+}
+
+//app.use("/client", express.static(path.join(__dirname, "dist")));
+/*app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
-});
+});*/
 
 app.use(bodyParser.json());
 
