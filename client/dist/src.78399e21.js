@@ -57000,7 +57000,7 @@ function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this._mount = true;
-      var accessToken = localStorage.getItem('token');
+      var accessToken = localStorage.getItem("token");
 
       if (accessToken !== null) {
         this.deleteFavouriteMovie(accessToken);
@@ -57017,7 +57017,7 @@ function (_React$Component) {
     value: function getUser(token) {
       var _this2 = this;
 
-      var username = localStorage.getItem('user');
+      var username = localStorage.getItem("user");
 
       _axios.default.get("https://myflixmovies.herokuapp.com/users/".concat(username), {
         headers: {
@@ -57041,16 +57041,16 @@ function (_React$Component) {
   }, {
     key: "deleteFavouriteMovie",
     value: function deleteFavouriteMovie(movieId) {
-      var username = localStorage.getItem('user');
-      var token = localStorage.getItem('token');
+      var username = localStorage.getItem("user");
+      var token = localStorage.getItem("token");
 
       _axios.default.delete("https://myflixmovies.herokuapp.com/users/".concat(username, "/Movies/").concat(movieId), {
         headers: {
           Authorization: "Bearer ".concat(token)
         }
       }).then(function (response) {
-        alert('movie was removed from your favourites');
-        window.open('/userprofile', '_self');
+        alert("movie was removed from your favourites");
+        window.open("/userprofile", "_self");
       }).catch(function (error) {
         console.log(error);
       });
@@ -57728,7 +57728,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60903" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65003" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
