@@ -56055,7 +56055,7 @@ function MoviesList(props) {
       visibilityFilter = props.visibilityFilter;
   var filteredMovies = movies;
 
-  if (visibilityFilter !== '') {
+  if (visibilityFilter !== "") {
     filteredMovies = movies.filter(function (m) {
       var title = m.Title.toLowerCase();
       return title.includes(visibilityFilter.toLowerCase());
@@ -56065,6 +56065,7 @@ function MoviesList(props) {
   if (!movies) return _react.default.createElement("div", {
     className: "main-view"
   });
+  console.log(filteredMovies);
   return _react.default.createElement("div", {
     className: "movies-list"
   }, _react.default.createElement("div", {
@@ -57727,7 +57728,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49632" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60903" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

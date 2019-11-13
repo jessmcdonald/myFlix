@@ -1,28 +1,23 @@
 const path = require("path");
-
 const cors = require("cors"),
   express = require("express"),
   bodyParser = require("body-parser"),
   uuid = require("uuid"),
   mongoose = require("mongoose"),
   Models = require("./models.js");
-
 const Movies = Models.Movie;
 const Users = Models.User;
-
 const { check, validationResult } = require("express-validator");
 const app = express();
 const passport = require("passport");
 require("./passport");
-
 mongoose.connect(
   "mongodb+srv://myFlixDBAdmin:MyFlixDB@sleepyjess-tftph.mongodb.net/myFlixDB?retryWrites=true&w=majority",
   { useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false }
 );
 //mongoose.connect('mongodb://localhost:27017/myFlixDB', { useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false });
-
 var allowedOrigins = ["http://localhost:8080", "http://localhost:1234"];
-
+app.use(express.static(path.resolve(__dirname, "./client", "dist")));
 app.use(
   cors({
     origin: function(origin, callback) {
@@ -37,48 +32,17 @@ app.use(
     }
   })
 );
-
 //middleware functions
-
-app.use(express.static("public"));
-app.use(express.static(__dirname + "/public"));
-if (process.env.NODE_ENV === "production") {
-  // Exprees will serve up production assets
-  app.use(express.static("client/dist"));
-
-  // Express serve up index.html file if it doesn't recognize route
-  const path = require("path");
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "dist", "index.html"));
-  });
-}
-
-//app.use("/client", express.static(path.join(__dirname, "dist")));
-/*app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "dist", "index.html"));
-});*/
-
+// app.use(express.static("public"));
+// app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
-
 var auth = require("./auth")(app);
-
 app.use(function(err, req, res, next) {
   console.error(err.stack);
   res.status(500).send("Something went wrong!");
 });
-
-//GET functions
-
-app.get("/", function(req, res) {
-  res.send("Welcome to myFlix movie API");
-});
-
 //Gets all movie data
-
-app.get("/movies", passport.authenticate("jwt", { session: false }), function(
-  req,
-  res
-) {
+app.get("/movies", function(req, res) {
   Movies.find()
     .then(function(movies) {
       res.status(201).json(movies);
@@ -88,9 +52,7 @@ app.get("/movies", passport.authenticate("jwt", { session: false }), function(
       res.status(500).send("Error: " + err);
     });
 });
-
 //Gets the data of a movie by title
-
 app.get(
   "/movies/:Title",
   passport.authenticate("jwt", { session: false }),
@@ -105,9 +67,7 @@ app.get(
       });
   }
 );
-
 //Gets the description of a genre by name
-
 app.get(
   "/movies/genres/:Name",
   passport.authenticate("jwt", { session: false }),
@@ -122,9 +82,7 @@ app.get(
       });
   }
 );
-
 //Gets info about a director by name
-
 app.get(
   "/movies/directors/:Name",
   passport.authenticate("jwt", { session: false }),
@@ -139,9 +97,7 @@ app.get(
       });
   }
 );
-
 // Get all users
-
 app.get("/users", function(req, res) {
   Users.find()
     .then(function(users) {
@@ -152,7 +108,6 @@ app.get("/users", function(req, res) {
       res.status(500).send("Error: " + err);
     });
 });
-
 // Get a user by username
 app.get(
   "/users/:Username",
@@ -168,7 +123,6 @@ app.get(
       });
   }
 );
-
 //Adds data for new user to list of users
 /* We'll expect JSON in this format
 {
@@ -178,7 +132,6 @@ app.get(
   Email : String,
   Birthday : Date
 }*/
-
 app.post(
   "/users",
   [
@@ -194,13 +147,10 @@ app.post(
   ],
   (req, res) => {
     var errors = validationResult(req);
-
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
     }
-
     var hashedPassword = Users.hashPassword(req.body.Password);
-
     Users.findOne({ Username: req.body.Username })
       .then(function(user) {
         if (user) {
@@ -227,7 +177,6 @@ app.post(
       });
   }
 );
-
 // Update a user's info, by username
 /* We'll expect JSON in this format
 {
@@ -239,7 +188,6 @@ app.post(
   (required)
   Birthday: Date
 }*/
-
 app.put(
   "/users/:Username",
   passport.authenticate("jwt", { session: false }),
@@ -256,13 +204,10 @@ app.put(
   ],
   (req, res) => {
     var errors = validationResult(req);
-
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
     }
-
     var hashedPassword = Users.hashPassword(req.body.Password);
-
     Users.findOneAndUpdate(
       { Username: req.params.Username },
       {
@@ -285,9 +230,7 @@ app.put(
     );
   }
 );
-
 //Adds movie to a user's list of favourites
-
 app.post(
   "/users/:Username/Movies/:MovieID",
   passport.authenticate("jwt", { session: false }),
@@ -309,9 +252,7 @@ app.post(
     );
   }
 );
-
 //Deletes movie from list of favourites by user ID
-
 app.delete(
   "/users/:Username/Movies/:MovieID",
   passport.authenticate("jwt", { session: false }),
@@ -333,9 +274,7 @@ app.delete(
     );
   }
 );
-
 //Deletes user by username
-
 app.delete(
   "/users/:Username",
   passport.authenticate("jwt", { session: false }),
@@ -354,7 +293,14 @@ app.delete(
       });
   }
 );
-
+app.get("/", function(req, res) {
+  res.send("Welcome to myFlix movie API");
+});
+//deploy to heroku
+app.use("/client", express.static(path.join(__dirname, "dist")));
+app.get("/client/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
+});
 var port = process.env.PORT || 3000;
 app.listen(port, "0.0.0.0", function() {
   console.log("Listening on Port 3000");
