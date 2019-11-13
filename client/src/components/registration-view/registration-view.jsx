@@ -47,7 +47,7 @@ export function RegistrationView(props) {
         window.open("/", "_self");
       })
       .catch(e => {
-        console.log("error registering user");
+        console.log("error is=======>>>", e);
       });
   };
 
