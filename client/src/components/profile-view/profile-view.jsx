@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import Form from "react-bootstrap/Form";
@@ -100,94 +100,98 @@ export class ProfileView extends React.Component {
     );
     const { movies } = this.props.movies;
 
-    console.log(movies);
-    console.log(userData);
+    if (!userData) {
+      return null;
+    } else {
+      console.log(movies);
+      console.log(userData);
 
-    return (
-      <div className="profile-view">
-        <div className="profile-page">
-          <Container className="profile-box">
-            <Row>
-              <Col>
-                <div className="greeting">
-                  <h3>Hello {username}, welcome to your MyFlix profile:</h3>
-                </div>
-                <Form>
-                  <Form.Group controlId="formGroupUsername">
-                    <Form.Label>
-                      Username:
-                      <Form.Control
-                        plaintext
-                        readOnly
-                        defaultValue={username}
-                      />
-                    </Form.Label>
-                  </Form.Group>
-                  <Form.Group>
-                    <Form.Label>
-                      Password:
-                      <Form.Control
-                        type="password"
-                        plaintext
-                        readOnly
-                        defaultValue="******"
-                      />
-                    </Form.Label>
-                  </Form.Group>
-                  <Form.Group>
-                    <Form.Label>
-                      Email address:
-                      <Form.Control
-                        type="email"
-                        plaintext
-                        readOnly
-                        defaultValue={email}
-                      />
-                    </Form.Label>
-                  </Form.Group>
-                  <Form.Group>
-                    <Form.Label>
-                      Birthday:
-                      <Form.Control
-                        type="string"
-                        plaintext
-                        readOnly
-                        defaultValue={birthday && birthday.slice(0, 10)}
-                      />
-                    </Form.Label>
-                  </Form.Group>
-                  <Button className="edit-button" href="/editprofile">
-                    Edit Profile
-                  </Button>
-                </Form>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <div className="favourites-div">
-                  <h5>Your favourite movies:</h5>
-                  <div className="favourite-movies">
-                    <CardDeck className="card-deck">
-                      {favouriteMovieList.map(m => (
-                        <div className="favourite-movie">
-                          <MiniMovieCard key={m._id} movie={m} />
-                          <Button
-                            className="remove-favourite-button"
-                            size="sm"
-                            onClick={e => this.deleteFavouriteMovie(m._id)}
-                          >
-                            Remove from favourites
-                          </Button>
-                        </div>
-                      ))}
-                    </CardDeck>
+      return (
+        <div className="profile-view">
+          <div className="profile-page">
+            <Container className="profile-box">
+              <Row>
+                <Col>
+                  <div className="greeting">
+                    <h3>Hello {username}, welcome to your MyFlix profile:</h3>
                   </div>
-                </div>
-              </Col>
-            </Row>
-          </Container>
+                  <Form>
+                    <Form.Group controlId="formGroupUsername">
+                      <Form.Label>
+                        Username:
+                        <Form.Control
+                          plaintext
+                          readOnly
+                          defaultValue={username}
+                        />
+                      </Form.Label>
+                    </Form.Group>
+                    <Form.Group>
+                      <Form.Label>
+                        Password:
+                        <Form.Control
+                          type="password"
+                          plaintext
+                          readOnly
+                          defaultValue="******"
+                        />
+                      </Form.Label>
+                    </Form.Group>
+                    <Form.Group>
+                      <Form.Label>
+                        Email address:
+                        <Form.Control
+                          type="email"
+                          plaintext
+                          readOnly
+                          defaultValue={email}
+                        />
+                      </Form.Label>
+                    </Form.Group>
+                    <Form.Group>
+                      <Form.Label>
+                        Birthday:
+                        <Form.Control
+                          type="string"
+                          plaintext
+                          readOnly
+                          defaultValue={birthday && birthday.slice(0, 10)}
+                        />
+                      </Form.Label>
+                    </Form.Group>
+                    <Button className="edit-button" href="/editprofile">
+                      Edit Profile
+                    </Button>
+                  </Form>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <div className="favourites-div">
+                    <h5>Your favourite movies:</h5>
+                    <div className="favourite-movies">
+                      <CardDeck className="card-deck">
+                        {favouriteMovieList.map(m => (
+                          <div className="favourite-movie">
+                            <MiniMovieCard key={m._id} movie={m} />
+                            <Button
+                              className="remove-favourite-button"
+                              size="sm"
+                              onClick={e => this.deleteFavouriteMovie(m._id)}
+                            >
+                              Remove from favourites
+                            </Button>
+                          </div>
+                        ))}
+                      </CardDeck>
+                    </div>
+                  </div>
+                </Col>
+              </Row>
+            </Container>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
