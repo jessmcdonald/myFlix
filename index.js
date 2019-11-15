@@ -124,14 +124,7 @@ app.get(
   }
 );
 //Adds data for new user to list of users
-/* We'll expect JSON in this format
-{
-  ID : Integer,
-  Username: String,
-  Password : String,
-  Email : String,
-  Birthday : Date
-}*/
+
 app.post(
   "/users",
   [
@@ -177,6 +170,7 @@ app.post(
       });
   }
 );
+
 // Update a user's info, by username
 /* We'll expect JSON in this format
 {
