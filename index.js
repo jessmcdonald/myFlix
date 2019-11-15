@@ -16,7 +16,11 @@ mongoose.connect(
   { useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false }
 );
 //mongoose.connect('mongodb://localhost:27017/myFlixDB', { useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false });
-var allowedOrigins = ["http://localhost:8080", "http://localhost:1234"];
+var allowedOrigins = [
+  "http://localhost:8080",
+  "http://localhost:1234",
+  "https://myflixmovies.herokuapp.com"
+];
 app.use(express.static(path.resolve(__dirname, "./client", "dist")));
 app.use(
   cors({
