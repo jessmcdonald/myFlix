@@ -57185,7 +57185,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; if (obj != null) { var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
@@ -57226,8 +57226,8 @@ function UpdateProfile(props) {
       birthday = _useState8[0],
       updateBirthday = _useState8[1];
 
-  var token = localStorage.getItem('token');
-  var user = localStorage.getItem('user');
+  var token = localStorage.getItem("token");
+  var user = localStorage.getItem("user");
 
   var handleUpdate = function handleUpdate(e) {
     e.preventDefault();
@@ -57243,11 +57243,11 @@ function UpdateProfile(props) {
       }
     }).then(function (response) {
       var data = response.data;
-      alert('Your information has been updated');
+      alert("Your information has been updated");
       console.log(data);
-      window.open('/userprofile', '_self');
+      window.open("/userprofile", "_self");
     }).catch(function (e) {
-      console.log('error updating user info');
+      console.log("error updating user info");
     });
   };
 
@@ -57259,17 +57259,17 @@ function UpdateProfile(props) {
         Authorization: "Bearer ".concat(token)
       }
     }).then(function (response) {
-      alert('Your account has been deleted');
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      window.open('/', '_self');
+      alert("Your account has been deleted");
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      window.open("/", "_self");
 
       _this.setState({
         user: null
       });
     }).catch(function (error) {
       console.log(error);
-      alert('Could not delete user info');
+      alert("Could not delete user info");
     });
   };
 
