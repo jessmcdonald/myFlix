@@ -133,10 +133,16 @@ class MainView extends React.Component {
                   id="basic-nav-dropdown"
                   className="nav-dropdown"
                 >
-                  <NavDropdown.Item href="/userprofile" className="navlink">
+                  <NavDropdown.Item
+                    href="/client/userprofile"
+                    className="navlink"
+                  >
                     My Movies
                   </NavDropdown.Item>
-                  <NavDropdown.Item href="/userprofile" className="navlink">
+                  <NavDropdown.Item
+                    href="/client/userprofile"
+                    className="navlink"
+                  >
                     Account settings
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
