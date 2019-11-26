@@ -34,7 +34,7 @@ export class ProfileView extends React.Component {
     this._mount = true;
     let accessToken = localStorage.getItem("token");
     if (accessToken !== null) {
-      this.deleteFavouriteMovie(accessToken);
+      // this.deleteFavouriteMovie(accessToken);
       this.getUser(accessToken);
     }
   }
@@ -69,6 +69,7 @@ export class ProfileView extends React.Component {
   deleteFavouriteMovie(movieId) {
     let username = localStorage.getItem("user");
     let token = localStorage.getItem("token");
+    console.log(movie);
 
     axios
       .delete(
@@ -95,9 +96,12 @@ export class ProfileView extends React.Component {
       favouriteMovies,
       userData
     } = this.state;
-    const favouriteMovieList = this.props.movies.filter(m =>
-      this.state.favouriteMovies.includes(m._id)
-    );
+    let favouriteMovieList;
+    this.state.favouriteMovies &&
+      (favouriteMovieList = this.props.movies.filter(m =>
+        this.state.favouriteMovies.includes(m._id)
+      ));
+
     const { movies } = this.props.movies;
 
     if (!userData) {

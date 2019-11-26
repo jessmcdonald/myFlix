@@ -52,7 +52,7 @@ class MainView extends React.Component {
       .then(response => {
         this.props.setMovies(response.data);
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
   }
@@ -66,7 +66,7 @@ class MainView extends React.Component {
       .then(response => {
         this.props.setUser(response.data);
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
   }

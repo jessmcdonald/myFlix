@@ -57018,7 +57018,7 @@ function (_React$Component) {
       var accessToken = localStorage.getItem("token");
 
       if (accessToken !== null) {
-        this.deleteFavouriteMovie(accessToken);
+        // this.deleteFavouriteMovie(accessToken);
         this.getUser(accessToken);
       }
     }
@@ -57058,6 +57058,7 @@ function (_React$Component) {
     value: function deleteFavouriteMovie(movieId) {
       var username = localStorage.getItem("user");
       var token = localStorage.getItem("token");
+      console.log(movie);
 
       _axios.default.delete("https://myflixmovies.herokuapp.com/users/".concat(username, "/Movies/").concat(movieId), {
         headers: {
@@ -57082,9 +57083,10 @@ function (_React$Component) {
           birthday = _this$state.birthday,
           favouriteMovies = _this$state.favouriteMovies,
           userData = _this$state.userData;
-      var favouriteMovieList = this.props.movies.filter(function (m) {
+      var favouriteMovieList;
+      this.state.favouriteMovies && (favouriteMovieList = this.props.movies.filter(function (m) {
         return _this3.state.favouriteMovies.includes(m._id);
-      });
+      }));
       var movies = this.props.movies.movies;
 
       if (!userData) {
@@ -57522,10 +57524,10 @@ function (_React$Component) {
         id: "basic-nav-dropdown",
         className: "nav-dropdown"
       }, _react.default.createElement(_reactBootstrap.NavDropdown.Item, {
-        href: "/userprofile",
+        href: "/client/userprofile",
         className: "navlink"
       }, "My Movies"), _react.default.createElement(_reactBootstrap.NavDropdown.Item, {
-        href: "/userprofile",
+        href: "/client/userprofile",
         className: "navlink"
       }, "Account settings"), _react.default.createElement(_reactBootstrap.NavDropdown.Divider, null), _react.default.createElement(_reactBootstrap.NavDropdown.Item, {
         href: "/",
@@ -57748,7 +57750,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62881" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62465" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
