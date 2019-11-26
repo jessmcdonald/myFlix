@@ -21,7 +21,8 @@ var allowedOrigins = [
   "http://localhost:1234",
   "https://myflixmovies.herokuapp.com"
 ];
-app.use(express.static(path.resolve(__dirname, "/client", "/dist")));
+//app.use(express.static(path.resolve(__dirname, "/client", "/dist")));
+
 app.use(
   cors({
     origin: function(origin, callback) {
@@ -37,7 +38,12 @@ app.use(
   })
 );
 //middleware functions
-// app.use(express.static("public"));
+app.use(express.static("public"));
+app.use("/client", express.static(path.join(__dirname, "client", "dist")));
+app.get("/client/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+});
+
 // app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
 var auth = require("./auth")(app);
@@ -295,10 +301,10 @@ app.get("/", function(req, res) {
   res.send("Welcome to myFlix movie API");
 });
 //deploy to heroku
-app.use("/client", express.static(path.join(__dirname, "dist")));
-app.get("/client/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "dist", "index.html"));
-});
+// app.use("/client", express.static(path.join(__dirname, "dist")));
+// app.get("/client/*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "dist", "index.html"));
+// });
 var port = process.env.PORT || 3000;
 app.listen(port, "0.0.0.0", function() {
   console.log("Listening on Port 3000");
