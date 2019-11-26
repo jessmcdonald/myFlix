@@ -21,7 +21,7 @@ var allowedOrigins = [
   "http://localhost:1234",
   "https://myflixmovies.herokuapp.com"
 ];
-app.use(express.static(path.resolve(__dirname, "./client", "dist")));
+app.use(express.static(path.resolve(__dirname, "/client", "/dist")));
 app.use(
   cors({
     origin: function(origin, callback) {
